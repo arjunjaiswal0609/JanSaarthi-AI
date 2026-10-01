@@ -1,0 +1,97 @@
+/* ==========================================================================
+   JanSaarthi AI — shared design tokens
+   Both portals import this file. Theme is controlled by [data-theme] on
+   <html> ("light" | "dark") so the toggle works identically everywhere,
+   including the officer portal (which merely *defaults* to dark).
+   ========================================================================== */
+:root{
+  --bg:#F5F7FB; --surface:#FFFFFF; --surface-2:#EDF0F8; --ink:#07111F; --ink-2:#465166; --line:#DCE2EE;
+  --primary:#5B4CFF; --primary-ink:#FFFFFF; --primary-soft:#ECEAFF; --lav:#AFA7FF;
+  --ai:#0B7F99; --ai-soft:#DDF6FB; --cyan:#00D9FF;
+  --success:#0B8F5F; --success-soft:#DCF6EA; --warning:#9A6200; --warning-soft:#FFF0CF; --danger:#D42F44; --danger-soft:#FFE4E7;
+  --hero-a:rgba(91,76,255,.16); --hero-b:rgba(0,217,255,.18);
+  --radius-sm:8px; --radius-md:14px; --radius-lg:26px;
+  --shadow-sm:0 1px 2px rgba(7,17,31,.06),0 1px 1px rgba(7,17,31,.04);
+  --shadow-md:0 8px 24px rgba(7,17,31,.08);
+  --shadow-lg:0 24px 60px rgba(7,17,31,.14);
+  --space-xs:6px; --space-sm:12px; --space-md:20px; --space-lg:40px;
+  --font:'Manrope','Noto Sans Devanagari',system-ui,sans-serif;
+  --font-num:'Space Grotesk','Manrope',sans-serif;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#0A1424; --surface:#101C31; --surface-2:#172640; --ink:#EAF0FB; --ink-2:#A5B2C9; --line:#243553;
+  --primary:#8A7FFF; --primary-ink:#07111F; --primary-soft:#221F55; --ai:#3FD8F5; --ai-soft:#0F3340;
+  --success:#2BDC98; --success-soft:#0F3A2B; --warning:#FFB020; --warning-soft:#3A2B0C; --danger:#FF6B7A; --danger-soft:#42171E;
+  --hero-a:rgba(91,76,255,.30); --hero-b:rgba(0,217,255,.14);
+  --shadow-md:0 8px 24px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+/* Officer portal: same token system, just defaults to dark unless the
+   toggle explicitly sets data-theme="light" (see officer/js/app.js). */
+:root[data-theme="officer-default"]{
+  --bg:#07111F; --surface:#0E1B31; --surface-2:#14243F; --ink:#EAF0FB; --ink-2:#9FB0CB; --line:#22344F;
+  --primary:#8A7FFF; --primary-ink:#07111F; --primary-soft:#221F55; --ai:#3FD8F5; --ai-soft:#0F3340;
+  --success:#2BDC98; --success-soft:#0F3A2B; --warning:#FFB020; --warning-soft:#3A2B0C; --danger:#FF6B7A; --danger-soft:#42171E;
+  --shadow-md:0 8px 24px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;line-height:1.08;letter-spacing:-.02em}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--primary);color:var(--primary-ink);padding:8px 14px;border-radius:8px;z-index:200}
+.skip:focus{left:8px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.num{font-family:var(--font-num);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.muted{color:var(--ink-2)}
+.small{font-size:13px}
+.row{display:flex;gap:var(--space-sm);align-items:center;flex-wrap:wrap}
+.col{display:flex;flex-direction:column;gap:var(--space-sm)}
+.between{justify-content:space-between}
+.grid{display:grid;gap:var(--space-md)}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+.ic{flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+@media (max-width:1000px){ .g3,.g4{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:640px){ .g2,.g3,.g4{grid-template-columns:1fr} }
+
+/* ======================================================================
+   LIGHT EDITORIAL THEME — visual layer only
+   The dark palette above is intentionally untouched. These overrides are
+   activated only when the document is not using dark/officer-default.
+   ====================================================================== */
+:root:not([data-theme="dark"]):not([data-theme="officer-default"]){
+  --bg:#F7F6F1;
+  --surface:#FFFDF9;
+  --surface-2:#F0EFEA;
+  --ink:#101728;
+  --ink-2:#5B6473;
+  --line:#D8DBE5;
+  --primary:#5E4BFF;
+  --primary-ink:#FFFFFF;
+  --primary-soft:#EEEAFE;
+  --lav:#B9B1FF;
+  --ai:#087F91;
+  --ai-soft:#DFF5F6;
+  --cyan:#08B9D2;
+  --success:#118A64;
+  --success-soft:#DFF5EB;
+  --warning:#9A6500;
+  --warning-soft:#FFF0CE;
+  --danger:#C9475A;
+  --danger-soft:#FFE6E9;
+  --hero-a:rgba(113,91,255,.16);
+  --hero-b:rgba(8,185,210,.15);
+  --shadow-sm:0 1px 2px rgba(25,31,48,.05),0 8px 22px rgba(65,61,96,.035);
+  --shadow-md:0 14px 36px rgba(48,45,78,.09),0 2px 5px rgba(25,31,48,.04);
+  --shadow-lg:0 28px 80px rgba(48,45,78,.14),0 8px 18px rgba(25,31,48,.05);
+  --font-display:'DM Serif Display',Georgia,serif;
+  color-scheme:light;
+}

@@ -1,0 +1,73 @@
+/* Officer & Admin portal — layout on top of shared tokens/components.
+   IMPORTANT: every colour here comes from a CSS variable (token), so the
+   light/dark toggle in app.js (which just flips [data-theme]) always works,
+   including on this portal. The portal still *defaults* to a dark palette
+   via data-theme="officer-default" set in app.js on first load. */
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;flex-wrap:nowrap;align-items:center;gap:14px;height:64px;max-width:1320px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:18px;text-decoration:none;flex:none;white-space:nowrap}
+.logo svg{width:28px;height:28px;flex:none}
+.nav{display:flex;gap:2px;flex:1 1 auto;min-width:0;overflow-x:auto;scrollbar-width:none;height:100%;align-items:center}
+.nav::-webkit-scrollbar{display:none}
+.nav a{padding:7px 10px;border-radius:999px;text-decoration:none;font-weight:600;font-size:13.5px;color:var(--ink-2);white-space:nowrap;flex:none}
+.nav a:hover{color:var(--ink);background:var(--surface-2)}
+.nav a[aria-current="page"]{color:var(--ink);background:var(--surface-2)}
+.tools{display:flex;gap:7px;align-items:center;flex:none;white-space:nowrap}
+.userchip .uname{max-width:120px;overflow:hidden;text-overflow:ellipsis;display:inline-block;vertical-align:bottom}
+.iconbtn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center}
+.iconbtn:hover{background:var(--surface-2)}
+@media (max-width:1150px){ .searchchip span{display:none} }
+@media (max-width:880px){ .userchip{max-width:0;padding:0;border:0;overflow:hidden} }
+
+.cc-shell{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 64px)}
+.side{border-right:1px solid var(--line);padding:22px 14px;position:sticky;top:64px;height:calc(100vh - 64px);overflow:auto;background:var(--surface)}
+.side a{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:600;font-size:14.5px;color:var(--ink-2)}
+.side a:hover{background:var(--surface-2);color:var(--ink)}
+.side a[aria-current="page"]{background:var(--surface-2);color:var(--ink);box-shadow:inset 3px 0 0 var(--primary)}
+.cc-main{padding:26px 28px 90px;min-width:0;background:var(--bg)}
+@media (max-width:1000px){ .cc-shell{grid-template-columns:1fr} .side{position:static;height:auto;display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:8px} .side a{white-space:nowrap} .cc-main{padding:18px 14px 90px} }
+
+.cc-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;margin-top:18px}
+@media (max-width:1000px){ .cc-grid{grid-template-columns:1fr} }
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px 18px}
+.panel h3{font-size:16px;font-weight:800;margin-bottom:10px}
+.feed{display:flex;flex-direction:column}
+.ev{display:grid;grid-template-columns:4px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.ev:last-child{border:0}
+.ev .bar{border-radius:2px;background:var(--ai)}
+.ev.emerging .bar{background:var(--warning)}.ev.recurring .bar{background:var(--danger)}.ev.sla .bar{background:var(--primary)}.ev.chal .bar{background:var(--danger)}.ev.ok .bar{background:var(--success)}
+.ev b{font-size:12px;letter-spacing:.02em;color:var(--ai)}
+.ev.emerging b{color:var(--warning)}.ev.recurring b,.ev.chal b{color:var(--danger)}.ev.sla b{color:var(--primary)}.ev.ok b{color:var(--success)}
+.ev p{font-size:14px;font-weight:600}
+.ev small{color:var(--ink-2)}
+.side-panel{position:absolute;right:12px;top:12px;bottom:12px;width:min(320px,calc(100% - 24px));background:color-mix(in srgb,var(--surface) 96%,transparent);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:auto;z-index:600;box-shadow:var(--shadow-md)}
+
+@media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms!important;transition-duration:.001ms!important} }
+
+/* V6 — dark theme parity with the premium light workspace */
+:root[data-theme="dark"] .cc-main,:root[data-theme="officer-default"] .cc-main{background:radial-gradient(850px 460px at 86% 0%,rgba(63,216,245,.055),transparent 65%),radial-gradient(700px 430px at 10% 8%,rgba(138,127,255,.075),transparent 68%),var(--bg)}
+:root[data-theme="dark"] .panel,:root[data-theme="officer-default"] .panel{background:linear-gradient(145deg,rgba(16,28,49,.96),rgba(13,26,46,.92));border-color:#2c4161;border-radius:20px;box-shadow:0 18px 46px rgba(0,0,0,.18)}
+:root[data-theme="dark"] .side,:root[data-theme="officer-default"] .side{background:rgba(9,20,36,.9);border-right-color:#293c59}
+:root[data-theme="dark"] .side a[aria-current="page"],:root[data-theme="officer-default"] .side a[aria-current="page"]{background:linear-gradient(90deg,rgba(138,127,255,.18),rgba(63,216,245,.06));box-shadow:inset 3px 0 #8a7fff}
+:root[data-theme="dark"] .graph-box,:root[data-theme="officer-default"] .graph-box,:root[data-theme="dark"] .mapbox,:root[data-theme="officer-default"] .mapbox{border-radius:20px;border-color:#2c4161;box-shadow:0 18px 44px rgba(0,0,0,.2)}
+
+/* V6 dark-theme polish: retain information architecture, add premium visual depth */
+:root[data-theme="dark"],:root[data-theme="officer-default"]{--surface:#101b2f;--surface-2:#14223a;--line:#2c3d5d;--ink:#eef3ff;--ink-2:#a9b6cc}
+:root[data-theme="dark"] body,:root[data-theme="officer-default"] body{background:radial-gradient(900px 520px at 85% 8%,rgba(0,205,225,.07),transparent 60%),radial-gradient(800px 500px at 15% 15%,rgba(103,82,255,.09),transparent 65%),#091526}
+:root[data-theme="dark"] .panel,:root[data-theme="officer-default"] .panel{background:linear-gradient(145deg,rgba(18,31,53,.98),rgba(13,25,44,.98));border-color:#2c3d5d;box-shadow:0 20px 48px rgba(0,0,0,.18)}
+:root[data-theme="dark"] .kpi,:root[data-theme="officer-default"] .kpi{background:linear-gradient(145deg,#13213a,#0f1b30);border-color:#2b3d5d}
+:root[data-theme="dark"] .top,:root[data-theme="officer-default"] .top{background:rgba(9,21,38,.86);backdrop-filter:blur(18px)}
+
+
+/* Government workspace — permanent premium light presentation. */
+.officer-body{background:#F7F6F1}.officer-body .top{background:rgba(255,253,249,.88);border-bottom-color:#D8DBE5;backdrop-filter:blur(16px)}.officer-body .top .logo{font-size:19px}.officer-body .cc-main{background:radial-gradient(900px 500px at 100% 0%,rgba(8,185,210,.07),transparent 62%),radial-gradient(760px 500px at 0% 8%,rgba(94,75,255,.07),transparent 64%),#F7F6F1}.officer-body .side{background:rgba(255,253,249,.78);border-right-color:#D8DBE5}.officer-body .side a{color:#596476;border-radius:12px}.officer-body .side a:hover{background:#F0EFEA;color:#182033}.officer-body .side a[aria-current="page"]{background:#EEEAFE;color:#20243A;box-shadow:inset 3px 0 #6655FF}.officer-body .kpi{border-radius:20px;background:linear-gradient(145deg,#fff,#F8F9FB);border-color:#D8DCE6;box-shadow:0 10px 28px rgba(50,54,82,.06)}.officer-body .panel{border-radius:20px;border-color:#D8DCE6;background:rgba(255,253,249,.88);box-shadow:0 10px 28px rgba(50,54,82,.05)}
+
+/* Government subpage editorial headers: same signature language as the citizen workspace, without changing layout/data. */
+.officer-body .gov-workspace-header.reveal{opacity:1;transform:none;transition:none}
+.officer-body .gov-workspace-header{margin-bottom:24px;background:radial-gradient(560px 220px at 82% 18%,rgba(13,174,187,.10),transparent 72%),radial-gradient(520px 220px at 8% 92%,rgba(103,82,255,.10),transparent 70%),linear-gradient(135deg,#fffdf9,#f7f8fb);border-color:#CBD0E0;box-shadow:0 18px 45px rgba(47,49,80,.08)}
+.officer-body .gov-workspace-header .workspace-code{color:#5B4CFF}
+.officer-body .gov-workspace-header .workspace-index{background:linear-gradient(145deg,#6655FF,#11A9C7)}
+.officer-body .gov-workspace-header .workspace-copy h1{font-size:clamp(32px,4vw,54px)}
+@media(max-width:700px){.officer-body .gov-workspace-header{margin-top:12px}.officer-body .gov-workspace-header .workspace-copy h1{font-size:clamp(30px,9vw,44px)}}
